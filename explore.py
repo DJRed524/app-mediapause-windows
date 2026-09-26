@@ -8,5 +8,8 @@ async def main():
     for s in sessions:
         info = s.get_playback_info()
         print(s.source_app_user_model_id, PlaybackStatus(info.playback_status).name) # prints the app name and the playback status of each session
+        if "spotify" in s.source_app_user_model_id.lower():
+            print("Pausing Spotify...")
+            await s.try_pause_async()        
 
 asyncio.run(main())
